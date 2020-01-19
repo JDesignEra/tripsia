@@ -1,0 +1,13 @@
+﻿main {
+    margin-top: 4.5rem !important;
+    min-height: calc(100vh - 125px);
+}
+
+nav.navbar .dropdown-menu .dropdown-item i {
+    min-width: 20px;
+}
+
+nav.navbar .dropdown-menu .dropdown-item.text-danger:hover {
+    color: #ffffff !important;
+    background-color: #dc3545 !important;
+}

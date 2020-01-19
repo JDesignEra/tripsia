@@ -1,0 +1,255 @@
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+// GLOBAL
+// links
+a,
+a:not([href]):not([tabindex]).link {
+    cursor: pointer;
+    text-decoration: none;
+    color: map-get($material-colors, "primary-color");
+    &:hover {
+        color: lighten(map-get($material-colors, "primary-color"), 10%);
+    }
+    &.disabled,
+    &:disabled {
+        &:hover {
+            color: map-get($material-colors, "primary-color");
+        }
+    }
+}
+
+// FORMS
+.md-form {
+    input[type=text],
+    input[type=password],
+    input[type=email],
+    input[type=url],
+    input[type=time],
+    input[type=date],
+    input[type=datetime-local],
+    input[type=tel],
+    input[type=number],
+    input[type=search-md],
+    input[type=search],
+    textarea.md-textarea {
+        &:focus:not([readonly]) {
+            box-shadow: inset 0 1px 0 0 map-get($material-colors, "primary-color") !important;
+            border-bottom: 1px solid map-get($material-colors, "primary-color") !important;
+
+            + label {
+                color: map-get($material-colors, "primary-color") !important;
+            }
+        }
+    }
+
+    &.md-outline {
+        input[type=text],
+        input[type=password],
+        input[type=email],
+        input[type=url],
+        input[type=time],
+        input[type=date],
+        input[type=datetime-local],
+        input[type=tel],
+        input[type=number],
+        input[type=search-md],
+        input[type=search],
+        textarea.md-textarea {
+            &:focus:not([readonly]) {
+                border-color: map-get($material-colors, "primary-color") !important;
+                box-shadow: inset 0px 0px 0px 1px map-get($material-colors, "primary-color") !important;
+
+                + label,
+                ~ label.active {
+                    color: map-get($material-colors, "primary-color") !important;
+                }
+            }
+        }
+        
+        > label:not(.active) {
+            transform: translateY(8px);
+        }
+
+        .is-valid {
+            border-color: map-get($material-colors, "success-color") !important;
+            box-shadow: inset 0px 0px 0px 1px map-get($material-colors, "success-color") !important;
+            background-position: center right 0.375em!important;
+            padding: .375rem .75rem;
+
+            + label.active {
+                color: map-get($material-colors, "success-color");
+            }
+
+            :-webkit-inner-spin-button,
+            :-webkit-outer-spin-button {
+                margin-right: 1rem;
+            }
+        }
+
+        .is-invalid {
+            border-color: map-get($material-colors, "danger-color") !important;
+            box-shadow: inset 0px 0px 0px 1px map-get($material-colors, "danger-color") !important;
+            background-position: center right 0.375em!important;
+            padding: .375rem .75rem;
+
+            + label.active {
+                color: map-get($material-colors, "danger-color");
+            }
+        }
+    }
+}
+
+input.is-valid::-webkit-outer-spin-button, 
+input.is-valid::-webkit-inner-spin-button,
+input.is-invalid::-webkit-outer-spin-button, 
+input.is-invalid::-webkit-inner-spin-button {
+    margin-right: 1rem;;
+}
+
+// INPUT-GROUP
+.input-group {
+    margin-bottom: 1.875rem;
+
+    > .md-outline {
+        margin: 0;
+        flex: 1 1 auto;
+        width: 1%;
+
+        > .form-control {
+            margin: 0;
+        }
+
+        > .form-text {
+            position: absolute;
+        }
+    
+        > .invalid-feedback {
+            width: calc(100vw - (1rem * 2 + .5rem * 2));
+            position: absolute;
+        }
+
+        > .is-valid {
+            border-color: map-get($material-colors, "success-color") !important;
+            box-shadow: inset 0px 0px 0px 1px map-get($material-colors, "success-color") !important;
+            background-position: center right 0.375em!important;
+
+            + label.active {
+                color: map-get($material-colors, "success-color");
+            }
+        }
+
+        > .is-invalid {
+            border-color: map-get($material-colors, "danger-color") !important;
+            box-shadow: inset 0px 0px 0px 1px map-get($material-colors, "danger-color") !important;
+            background-position: center right 0.375em!important;
+
+            + label.active {
+                color: map-get($material-colors, "danger-color");
+            }
+        }
+    }
+
+    .form-control:not(:last-child),
+    .input-group>.custom-select:not(:last-child) {
+        border-top-right-radius: .25rem;
+        border-bottom-right-radius: .25rem;
+    }
+
+    > .md-outline:not(:last-child),
+    > .md-outline:first-child {
+        > .form-control {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
+    > .md-outline:not(:first-child),
+    > .md-outline:last-child {
+        > .form-control {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+
+    > .input-group-prepend,
+    > .input-group-append:not(:last-child),
+    > .input-group-append:last-child {
+        > .md-outline:not(:last-child),
+        > .md-outline:last-child {
+            > .form-control {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+        }
+    }
+
+    > .input-group-append,
+    > .input-group-prepend:not(:first-child),
+    > .input-group-prepend:first-child {
+        > .md-outline:not(:first-child),
+        > .md-outline:first-child {
+            > .form-control {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+    }
+    
+    > .input-group-prepend,
+    > .input-group-prepend:not(:last-child) {
+        > .btn {
+            border-top-right-radius: .25rem !important;
+            border-bottom-right-radius: .25rem !important;
+        }
+    }
+
+    > .input-group-prepend:last-child {
+        > .btn:not(:last-child) {
+            border-top-right-radius: .25rem !important;
+            border-bottom-right-radius: .25rem !important;
+        }
+    }
+
+    > .input-group-append,
+    > .input-group-prepend:not(:first-child) {
+        > .btn {
+            border-top-right-radius: .25rem !important;
+            border-bottom-right-radius: .25rem !important;
+        }
+    }
+
+    > .input-group-prepend:first-child {
+        > .btn:not(:first-child) {
+            border-top-right-radius: .25rem !important;
+            border-bottom-right-radius: .25rem !important;
+        }
+    }
+}
+
+@media (max-width: 767.98px) {
+    .input-group {
+        margin-bottom: .875rem;
+    }
+}
+
+// TOASTS
+.md-toast-message {
+    font-weight: 400;
+
+    &:first-letter {
+        text-transform: capitalize;
+    }
+}
+
+.md-toast-top-right {
+    top: 6rem;
+}
+
+@media (max-width: 767.98px) {
+    .md-toast-top-right {
+        top: 4rem;
+    }
+}
