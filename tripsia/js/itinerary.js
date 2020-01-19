@@ -69,4 +69,18 @@
             $(editDescClientId).next().removeClass('active');
         }
     });
+
+    // Delete Modal Button
+    $('button[data-target="#delModal"]').on('click', function () {
+        let id = $(this).attr('data-id');
+        let title = $(this).attr('data-title');
+        let modal = $('#delModal');
+
+        console.log(title);
+
+        $(delIdClientId).val(id);
+        $(delTitleClientId).val(title);
+        modal.find('.modal-title').html(`<i class="fas fa-trash-alt mr-1"></i> DELETE ${title.toUpperCase()} SCHEDULE`);
+        modal.find('.modal-body').text(`Are you sure you want to delete ${title} schedule?`);
+    });
 });

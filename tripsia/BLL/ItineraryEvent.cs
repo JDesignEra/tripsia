@@ -50,6 +50,12 @@ namespace tripsia.BLL
             return da.SelectDateNoDupeByIid(this);
         }
 
+        public bool DeleteById()
+        {
+            ItineraryEventDAO da = new ItineraryEventDAO();
+            return da.DeleteById(this);
+        }
+
         public bool DeleteByIid()
         {
             ItineraryEventDAO da = new ItineraryEventDAO();

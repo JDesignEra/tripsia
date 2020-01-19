@@ -54,19 +54,33 @@ namespace tripsia.DAL
 
             if (ds.Tables[0].Rows.Count > 0)
             {
-                sql = "UPDATE Itinerary_Event SET title = @title, description = @description, dateTime = @dateTime WHERE id = @id";
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                sql = "SELECT * FROM Itinerary_Event WHERE id! = @id AND iid = @iid AND dateTime = @dateTime";
+                da = new SqlDataAdapter(sql, conn);
+                da.SelectCommand.Parameters.AddWithValue("@id", itineraryEvent.id);
+                da.SelectCommand.Parameters.AddWithValue("@iid", itineraryEvent.iid);
+                da.SelectCommand.Parameters.AddWithValue("@dateTime", itineraryEvent.dateTime);
 
-                cmd.Parameters.AddWithValue("@id", itineraryEvent.id);
-                cmd.Parameters.AddWithValue("@title", itineraryEvent.title);
-                cmd.Parameters.AddWithValue("@description", itineraryEvent.description);
-                cmd.Parameters.AddWithValue("@dateTime", itineraryEvent.dateTime);;
+                ds = new DataSet();
+                da.Fill(ds);
 
-                conn.Open();
-                int result = cmd.ExecuteNonQuery();
-                conn.Close();
+                if (ds.Tables[0].Rows.Count < 1)
+                {
+                    sql = "UPDATE Itinerary_Event SET title = @title, description = @description, dateTime = @dateTime WHERE id = @id";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
 
-                return result != 0;
+                    cmd.Parameters.AddWithValue("@id", itineraryEvent.id);
+                    cmd.Parameters.AddWithValue("@title", itineraryEvent.title);
+                    cmd.Parameters.AddWithValue("@description", itineraryEvent.description);
+                    cmd.Parameters.AddWithValue("@dateTime", itineraryEvent.dateTime); ;
+
+                    conn.Open();
+                    int result = cmd.ExecuteNonQuery();
+                    conn.Close();
+
+                    return result != 0;
+                }
+
+                return false;
             }
 
             return false;
@@ -109,6 +123,22 @@ namespace tripsia.DAL
             }
 
             return null;
+        }
+
+        public bool DeleteById(ItineraryEvent itineraryEvent)
+        {
+            SqlConnection conn = new SqlConnection(db);
+
+            string sql = "DELETE FROM Itinerary_Event WHERE id = @id";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+
+            cmd.Parameters.AddWithValue("@id", itineraryEvent.id);
+
+            conn.Open();
+            int result = cmd.ExecuteNonQuery();
+            conn.Close();
+
+            return result != 0;
         }
 
         public bool DeleteByIid(ItineraryEvent itineraryEvent)

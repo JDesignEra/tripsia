@@ -34,7 +34,11 @@ namespace tripsia
         {
             if (Session["uid"] != null && Page.IsValid)
             {
-                BLL.Itinerary itinerary = new BLL.Itinerary(title: newTitleTxtBox.Text.ToString(), description: newDescTxtBox.Text.ToString(), uid: int.Parse(Session["uid"].ToString()));
+                BLL.Itinerary itinerary = new BLL.Itinerary(
+                    title: newTitleTxtBox.Text.ToString(),
+                    description: newDescTxtBox.Text.ToString(),
+                    uid: int.Parse(Session["uid"].ToString())
+                );
 
                 if (itinerary.Create())
                 {
@@ -61,7 +65,12 @@ namespace tripsia
         {
             if (Session["uid"] != null)
             {
-                BLL.Itinerary itinerary = new BLL.Itinerary(id: int.Parse(editIdTxtBox.Text.ToString()), title: editTitleTxtBox.Text.ToString(), description: editDescTxtBox.Text.ToString(), uid: int.Parse(Session["uid"].ToString()));
+                BLL.Itinerary itinerary = new BLL.Itinerary(
+                    id: int.Parse(editIdTxtBox.Text.ToString()),
+                    title: editTitleTxtBox.Text.ToString(),
+                    description: editDescTxtBox.Text.ToString(),
+                    uid: int.Parse(Session["uid"].ToString())
+                );
 
                 if (itinerary.Update())
                 {
@@ -111,7 +120,7 @@ namespace tripsia
                     true
                 );
 
-                Response.AddHeader("REFRESH", "1;URL=itineraries.aspx");
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "modal", "showModal('#delModal');", true);
             }
         }
     }

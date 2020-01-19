@@ -58,11 +58,11 @@
                                     </div>
 
                                     <div class="card-footer d-none">
-                                        <button class="btn btn-md btn-info btn-block" data-toggle="modal" data-target="#editModal" data-id="<%#Eval("id") %>" data-date="<%#Eval("dateTime", "{0:dd/MM/yyyy}") %>" data-time="<%#Eval("dateTime", "{0:hh:mmtt}") %>" data-title="<%#Eval("title") %>" data-desc="<%#Eval("description") %>" type="button">
+                                        <button class="btn btn-md btn-info btn-block" data-toggle="modal" data-target="#editModal" data-id="<%#Eval("id") %>" data-title="<%#Eval("title") %>" data-desc="<%#Eval("description") %>" data-date="<%#Eval("dateTime", "{0:dd/MM/yyyy}") %>" data-time="<%#Eval("dateTime", "{0:hh:mmtt}") %>" type="button">
                                             EDIT
                                         </button>
 
-                                        <button class="btn btn-md btn-danger btn-block mt-2" type="button">
+                                        <button class="btn btn-md btn-danger btn-block mt-2" data-toggle="modal" data-target="#delModal" data-id="<%#Eval("id") %>" data-title="<%#Eval("title") %>" data-desc="<%#Eval("description") %>" data-date="<%#Eval("dateTime", "{0:dd/MM/yyyy}") %>" data-time="<%#Eval("dateTime", "{0:hh:mmtt}") %>" type="button">
                                             DELETE
                                         </button>
                                     </div>
@@ -248,13 +248,45 @@
         </div>
     </div>
 
+    <div id="delModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fas fa-trash-alt mr-1"></i> DELETE SCHEDULE
+                        </h5>
+
+                        <button type="button" class="close" data-dismiss="modal">
+                            &times;
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        Are you sure you want to delete this itinerary?
+                    </div>
+
+                    <div class="modal-footer">
+                        <asp:TextBox ID="delIdTxtBox" runat="server" TextMode="Number" style="display: none"></asp:TextBox>
+                        <asp:TextBox ID="delTitleTxtBox" runat="server" TextMode="SingleLine" style="display: none"></asp:TextBox>
+                        <button class="btn btn-md btn-success" type="button" data-dismiss="modal">CANCEL</button>
+                        <asp:Button ID="delBtn" runat="server" Text="DELETE" CssClass="btn btn-md btn-danger" OnClick="delBtn_Click" CausesValidation="false" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         let editIdClientId = '#<%= editIdTxtBox.ClientID %>';
         let editDateClientId = '#<%= editDateTxtBox.ClientID %>';
         let editTimeClientId = '#<%= editTimeTxtBox.ClientID %>';
         let editTitleClientId = '#<%= editTitleTxtBox.ClientID %>';
         let editDescClientId = '#<%= editDescTxtBox.ClientID %>';
+
+        let delIdClientId = '#<%= delIdTxtBox.ClientID %>';
+        let delTitleClientId = '#<%= delTitleTxtBox.ClientID %>';
     </script>
 
-    <script src="js/itineraries.js" type="text/javascript"></script>
+    <script src="js/itinerary.js" type="text/javascript"></script>
 </asp:Content>
