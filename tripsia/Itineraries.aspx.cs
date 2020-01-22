@@ -99,7 +99,7 @@ namespace tripsia
             {
                 BLL.Itinerary itinerary = new BLL.Itinerary(id: int.Parse(delIdTxtBox.Text.ToString()), uid: int.Parse(Session["uid"].ToString()));
 
-                if (itinerary.DeleteByIid())
+                if (itinerary.DeleteById())
                 {
                     Page.ClientScript.RegisterStartupScript(
                         this.GetType(),

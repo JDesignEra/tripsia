@@ -84,6 +84,26 @@ namespace tripsia.DAL
 
             return false;
         }
+
+        public DataTable SelectById(BLL.Itinerary itinerary)
+        {
+            SqlConnection conn = new SqlConnection(db);
+
+            string sql = "SELECT * FROM Itinerary WHERE id = @id";
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            da.SelectCommand.Parameters.AddWithValue("@id", itinerary.id);
+
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return ds.Tables[0];
+            }
+
+            return null;
+        }
+
         public DataTable SelectByUid(BLL.Itinerary itinerary)
         {
             SqlConnection conn = new SqlConnection(db);
