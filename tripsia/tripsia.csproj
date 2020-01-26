@@ -76,6 +76,7 @@
     <Content Include="css\mdb.min.css" />
     <Content Include="css\style.css" />
     <Content Include="Default.aspx" />
+    <Content Include="FNB_Map.aspx" />
     <Content Include="fonts\fontawesome\fa-brands-400.svg" />
     <Content Include="fonts\fontawesome\fa-duotone-900.svg" />
     <Content Include="fonts\fontawesome\fa-light-300.svg" />
@@ -110,6 +111,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FNB_Map.aspx.cs">
+      <DependentUpon>FNB_Map.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FNB_Map.aspx.designer.cs">
+      <DependentUpon>FNB_Map.aspx</DependentUpon>
     </Compile>
     <Compile Include="Itineraries.aspx.cs">
       <DependentUpon>Itineraries.aspx</DependentUpon>

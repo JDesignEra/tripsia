@@ -34,13 +34,19 @@ namespace tripsia.BLL
             return da.UpdateByUidAndTitle(this);
         }
 
+        public DataTable GetById()
+        {
+            ItineraryDAO da = new ItineraryDAO();
+            return da.SelectById(this);
+        }
+
         public DataTable GetByUid()
         {
             ItineraryDAO da = new ItineraryDAO();
             return da.SelectByUid(this);
         }
 
-        public bool DeleteByIid()
+        public bool DeleteById()
         {
             ItineraryDAO da = new ItineraryDAO();
 

@@ -19,6 +19,9 @@ namespace tripsia
             {
                 if (Request["id"] != null)
                 {
+                    BLL.Itinerary itinerary = new BLL.Itinerary(id: int.Parse(Request["id"]));
+                    Page.Title = string.Format("Tripsia | {0} Itinerary", itinerary.title);
+
                     DataTable dates = new ItineraryEvent(iid: int.Parse(Request["id"])).getDateNoDupeByIid();
 
                     if (dates != null)
