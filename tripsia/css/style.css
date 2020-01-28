@@ -1,6 +1,7 @@
 ﻿main {
     margin-top: 4.5rem !important;
-    min-height: calc(100vh - 125px);
+    margin-bottom: 1rem !important;
+    min-height: calc(100vh - 5.5rem - 53.33px);
 }
 
 nav.navbar .dropdown-menu .dropdown-item i {

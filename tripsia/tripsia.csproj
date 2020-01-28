@@ -87,6 +87,7 @@
     <Content Include="Itineraries.aspx" />
     <Content Include="Itinerary.aspx" />
     <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\fnb_map.js" />
     <Content Include="js\itineraries.js" />
     <Content Include="js\itinerary.js" />
     <Content Include="js\jquery-3.4.1.min.js" />
