@@ -57,12 +57,20 @@ $(document).ready(function () {
     randomGradient('.random-gradient');
 });
 
-function toastSuccess(toastMsg) {
-    toastr.success(toastMsg);
+function toastSuccess(msg, title = null, duration = null) {
+    toastr.success(msg, title, {
+        closeButton: true,
+        progressBar: true,
+        timeOut: duration !== null ? duration : 5000
+    });
 }
 
-function toastDanger(toastMsg) {
-    toastr.error(toastMsg);
+function toastDanger(msg, title = null, duration = null) {
+    toastr.error(msg, title, {
+        closeButton: true,
+        progressBar: true,
+        timeOut: duration !== null ? duration : 5000
+    });
 }
 
 function showModal(modalId) {
