@@ -71,9 +71,10 @@
     <Content Include="App_Data\database_log.ldf">
       <DependentUpon>database.mdf</DependentUpon>
     </Content>
-    <Content Include="css\bootstrap.min.css" />
-    <Content Include="css\fontawesome.min.css" />
-    <Content Include="css\mdb.min.css" />
+    <Content Include="css\vendors\bootstrap.min.css" />
+    <Content Include="css\vendors\fontawesome.min.css" />
+    <Content Include="css\vendors\mapbox-gl.css" />
+    <Content Include="css\vendors\mdb.min.css" />
     <Content Include="css\style.css" />
     <Content Include="Default.aspx" />
     <Content Include="FNB_Map.aspx" />
@@ -86,12 +87,14 @@
     <Content Include="images\logo-light.png" />
     <Content Include="Itineraries.aspx" />
     <Content Include="Itinerary.aspx" />
-    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\vendors\bootstrap.min.js" />
+    <Content Include="js\fnb_map.js" />
     <Content Include="js\itineraries.js" />
     <Content Include="js\itinerary.js" />
-    <Content Include="js\jquery-3.4.1.min.js" />
-    <Content Include="js\mdb.min.js" />
-    <Content Include="js\popper.min.js" />
+    <Content Include="js\vendors\jquery-3.4.1.min.js" />
+    <Content Include="js\vendors\mapbox-gl.js" />
+    <Content Include="js\vendors\mdb.min.js" />
+    <Content Include="js\vendors\popper.min.js" />
     <Content Include="js\script.js" />
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
