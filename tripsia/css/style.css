@@ -1,6 +1,7 @@
 ﻿main {
-    margin-top: 4.5rem !important;
-    min-height: calc(100vh - 125px);
+    padding-top: 4.5rem !important;
+    margin-bottom: 1rem !important;
+    min-height: calc(100vh - 5.5rem - 53.33px);
 }
 
 nav.navbar .dropdown-menu .dropdown-item i {
@@ -10,4 +11,14 @@ nav.navbar .dropdown-menu .dropdown-item i {
 nav.navbar .dropdown-menu .dropdown-item.text-danger:hover {
     color: #ffffff !important;
     background-color: #dc3545 !important;
+}
+
+/* Toast Override */
+#toast-container > div {
+    min-width: 24.5rem;
+}
+
+.md-toast-title {
+    font-weight: 900;
+    margin-bottom: .75rem;
 }
