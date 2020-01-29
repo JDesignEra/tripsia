@@ -81,6 +81,7 @@
     <Content Include="fonts\fontawesome\fa-light-300.svg" />
     <Content Include="fonts\fontawesome\fa-regular-400.svg" />
     <Content Include="fonts\fontawesome\fa-solid-900.svg" />
+    <Content Include="GiveReview.aspx" />
     <Content Include="images\logo-dark.png" />
     <Content Include="images\logo-light.png" />
     <Content Include="Itineraries.aspx" />
@@ -94,6 +95,7 @@
     <Content Include="js\script.js" />
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
+    <Content Include="Translator.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +111,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GiveReview.aspx.cs">
+      <DependentUpon>GiveReview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GiveReview.aspx.designer.cs">
+      <DependentUpon>GiveReview.aspx</DependentUpon>
     </Compile>
     <Compile Include="Itineraries.aspx.cs">
       <DependentUpon>Itineraries.aspx</DependentUpon>
@@ -145,6 +154,13 @@
     </Compile>
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Translator.aspx.cs">
+      <DependentUpon>Translator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Translator.aspx.designer.cs">
+      <DependentUpon>Translator.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
