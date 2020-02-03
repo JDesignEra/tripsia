@@ -18,14 +18,14 @@ namespace tripsia
 
                 if (itineraries != null)
                 {
-                    itinerariesRepeater.DataSource = itineraries;
-                    itinerariesRepeater.DataBind();
+                    //itinerariesRepeater.DataSource = itineraries;
+                    //itinerariesRepeater.DataBind();
 
-                    emptyMsg.Style.Add("display", "none !important");
+                    //emptyMsg.Style.Add("display", "none !important");
                 }
                 else
                 {
-                    emptyMsg.Style.Remove("display");
+                    //emptyMsg.Style.Remove("display");
                 }
             }
         }
@@ -34,7 +34,7 @@ namespace tripsia
         {
             if (Session["uid"] != null && Page.IsValid)
             {
-                BLL.Itinerary itinerary = new BLL.Itinerary(
+                /*BLL.Itinerary itinerary = new BLL.Itinerary(
                     title: newTitleTxtBox.Text.ToString(),
                     description: newDescTxtBox.Text.ToString(),
                     uid: int.Parse(Session["uid"].ToString())
@@ -57,13 +57,13 @@ namespace tripsia
                     newTitleValidator.IsValid = false;
 
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "modal", string.Format("showModal('#newModal');"), true);
-                }
+                }*/
             }
         }
 
         protected void updateBtn_Click(object sender, EventArgs e)
         {
-            if (Session["uid"] != null)
+            /*if (Session["uid"] != null)
             {
                 BLL.Itinerary itinerary = new BLL.Itinerary(
                     id: int.Parse(editIdTxtBox.Text.ToString()),
@@ -90,12 +90,12 @@ namespace tripsia
 
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "modal", string.Format("showModal('#editModal');"), true);
                 }
-            }
+            }*/
         }
 
         protected void delBtn_Click(object sender, EventArgs e)
         {
-            if (Session["uid"] != null)
+            /*if (Session["uid"] != null)
             {
                 BLL.Itinerary itinerary = new BLL.Itinerary(id: int.Parse(delIdTxtBox.Text.ToString()), uid: int.Parse(Session["uid"].ToString()));
 
@@ -121,7 +121,7 @@ namespace tripsia
                 );
 
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "modal", "showModal('#delModal');", true);
-            }
+            }*/
         }
     }
 }

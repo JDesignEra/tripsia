@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Airlines_Review.aspx" />
     <Content Include="App_Data\database.mdf" />
     <Content Include="App_Data\database_log.ldf">
       <DependentUpon>database.mdf</DependentUpon>
@@ -98,15 +99,25 @@
     <Content Include="js\script.js" />
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
+    <Content Include="Translation.aspx" />
     <Content Include="ViewProfile.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Airlines_Review.aspx.cs">
+      <DependentUpon>Airlines_Review.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Airlines_Review.aspx.designer.cs">
+      <DependentUpon>Airlines_Review.aspx</DependentUpon>
+    </Compile>
     <Compile Include="BLL\Itinerary.cs" />
     <Compile Include="BLL\ItineraryEvent.cs" />
+    <Compile Include="BLL\ReviewAir.cs" />
     <Compile Include="BLL\User.cs" />
     <Compile Include="DAL\ItineraryDAO.cs" />
     <Compile Include="DAL\ItineraryEventDAO.cs" />
+    <Compile Include="DAL\ReviewAirDAO.cs" />
     <Compile Include="DAL\UserDAO.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -157,6 +168,13 @@
     </Compile>
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Translation.aspx.cs">
+      <DependentUpon>Translation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Translation.aspx.designer.cs">
+      <DependentUpon>Translation.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewProfile.aspx.cs">
       <DependentUpon>ViewProfile.aspx</DependentUpon>
