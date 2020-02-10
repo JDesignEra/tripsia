@@ -237,6 +237,7 @@
       <DependentUpon>Translate.aspx</DependentUpon>
     </Compile>
     <Compile Include="utilities\PasswordUtilities.cs" />
+    <Compile Include="utilities\SendEmail.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Main.Master" />
