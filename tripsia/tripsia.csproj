@@ -117,6 +117,7 @@
     <Content Include="Profile.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Translate.aspx" />
+    <Content Include="videos\tropical.mp4" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

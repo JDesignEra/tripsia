@@ -46,8 +46,12 @@
                             </div>
                         </div>
 
-                        <small class="text-danger">
+                        <small class="text-danger d-block">
                             <asp:RequiredFieldValidator ID="passReqValidator" runat="server" ControlToValidate="passTxtBox" ErrorMessage="Password is required." Display="Dynamic"></asp:RequiredFieldValidator>
+                        </small>
+                        
+                        <small class="d-block text-right">
+                            <a href="Forget_Password.aspx">Forgot Password?</a>
                         </small>
 
                         <asp:Button ID="loginBtn" runat="server" Text="LOGIN" CssClass="btn btn-md btn-block btn-primary mt-3" OnClick="loginBtn_Click" />

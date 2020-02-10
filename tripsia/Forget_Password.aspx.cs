@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Net;
 using System.Net.Mail;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -15,7 +17,7 @@ namespace tripsia
 
         protected void forgotPassBtn_Click(object sender, EventArgs e)
         {
-            User user = new User(email: emailTxtBox.Text);
+            User user = new User(email: emailTxtBox.Text).GetUserByEmail();
 
             if (user != null)
             {
@@ -41,24 +43,26 @@ namespace tripsia
             try
             {
                 MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587);
+
                 mail.IsBodyHtml = true;
                 mail.From = new MailAddress("projectemail123789456@gmail.com");
                 mail.To.Add(args[0]);
                 mail.Subject = "Forget Password";
                 mail.Body =
                 mail.Body = string.Format("Dear, {0}<br />" +
-                    "<p>You have send a request to have a new password as you forgetten your old password.</p>" +
+                    "<p>It seems that you have forgotten your password.</p>" +
                     "<p>Your password is <strong>{1}</strong>.",
                     args[1], args[2]);
 
-                SmtpServer.Credentials = new System.Net.NetworkCredential("projectemail123789456@gmail.com", "eadpproject2020");
+                SmtpServer.Credentials = new NetworkCredential("projectemail123789456@gmail.com", "eadpproject2020");
                 SmtpServer.EnableSsl = true;
 
                 SmtpServer.Send(mail);
             }
-            catch
+            catch (Exception e)
             {
+                Debug.WriteLine(e);
                 Page.ClientScript.RegisterStartupScript(
                     this.GetType(),
                     "toast",
