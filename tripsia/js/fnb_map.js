@@ -1,5 +1,5 @@
-﻿mapboxgl.accessToken = "pk.eyJ1IjoiamRlc2lnbmVyYSIsImEiOiJjazVwMDBrNGkxYmU0M2RxcDJmcmZ3amN3In0.GwmfZFOXKAzvlF7qejj5lg";
-
+﻿let map;
+let marker = null;
 let geoLoc = new mapboxgl.GeolocateControl({
     positionOptions: {
         enableHighAccuracy: true
@@ -7,9 +7,18 @@ let geoLoc = new mapboxgl.GeolocateControl({
     trackUserLocation: true
 });
 
+let directions = new MapboxDirections({
+    accessToken: mapboxgl.accessToken,
+    interactive: false,
+    placeholderOrigin: 'From location'
+});
+
+
+let destCoords;
+let currCoords;
+
 $(document).ready(function () {
-    let currCoords;
-    let map = new mapboxgl.Map({
+    map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v10",
         center: [103.8, 1.3],
@@ -19,9 +28,11 @@ $(document).ready(function () {
         antialias: true
     });
 
-    map.addControl(geoLoc);
+    map.addControl(directions, 'top-left');
 
-    map.addControl(new mapboxgl.NavigationControl());
+    map.addControl(geoLoc, 'bottom-right');
+
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
     map.on('load', function () {
         geoLoc.trigger();
@@ -71,11 +82,30 @@ $(document).ready(function () {
         );
     });
 
+    setInterval(function () {
+        if ($('.mapboxgl-user-location-dot').length > 0) {
+            $('button[data-role="zoomCurrLoc').removeClass('d-none');
+            $('button[data-role="setOriginCurrLoc"]').removeClass('d-none');
+        }
+        else {
+            $('button[data-role="zoomCurrLoc').addClass('d-none');
+            $('button[data-role="setOriginCurrLoc"]').addClass('d-none');
+        }
+    }, 1000);
+
     geoLoc.on('geolocate', function (e) {
         currCoords = [e.coords.longitude, e.coords.latitude];
 
-        map.jumpTo({
-            center: currCoords
+        $(latClientId).val(currCoords[1]);
+        $(lngClientId).val(currCoords[0]);
+
+        if ($('input[placeholder="From location"]').val() === '') {
+            directions.setOrigin(currCoords);
+        }
+
+        map.flyTo({
+            center: currCoords,
+            zoom: 16.5
         });
     });
 
@@ -85,30 +115,58 @@ $(document).ready(function () {
             'CANNOT GET YOUR CURRENT LOCATION',
             -1
         );
+    });
 
-        // ToDo: May need to update
-        $(locClientId).removeAttr('value');
-        $(locClientId).next().removeClass('active');
+    directions.on('destination', function () {
+        $('button[data-role="zoomDest"').removeClass('d-none');
+    });
+
+    directions.on('clear', function (e) {
+        if (e.type === 'destination') {
+            $('button[data-role="zoomDest"').addClass('d-none');
+        }
     });
 
     $('button[data-role="zoomCurrLoc"]').on('click', function () {
-        if ($(locClientId).val() == 'Current Location') {
-            map.flyTo({
-                center: currCoords,
-                zoom: 16.5,
-                pitch: 45,
-                bearing: -17.6,
-            });
-        }
-        else if ($(locClientId).val() && $(locClientId).val() != 'Current Location') {
-            /* ToDo: Manual location from location input
-            map.flyTo({
-                center: currCoords,
-                zoom: 16.5,
-                pitch: 45,
-                bearing: -17.6,
-            });
-            */
-        }
+        map.flyTo({
+            center: currCoords,
+            zoom: 16.5,
+            pitch: 45,
+            bearing: -17.6,
+        });
     });
+
+    $('button[data-role="setOriginCurrLoc"]').on('click', function () {
+        directions.setOrigin(currCoords);
+    });
+
+    $('button[data-role="zoomDest"]').on('click', function () {
+        map.flyTo({
+            center: destCoords,
+            zoom: 16.5
+        });
+    });
+
+    $(setRadClientId).css({
+        'border-top-left-radius': 'unset',
+        'border-bottom-left-radius': 'unset'
+    });
+
+    $(setRadClientId).parent().css({
+        'border-top-left-radius': 'unset',
+        'border-bottom-left-radius': 'unset'
+    });
+
+    $('button.geocoder-icon-close').attr('type', 'button');
 });
+
+function getDirection(el) {
+    if (marker !== null) {
+        marker.remove();
+    }
+
+    destCoords = [$(el).attr('data-lng'), $(el).attr('data-lat')];
+
+    marker = new mapboxgl.Marker({ color: '#ff3547' }).setLngLat(destCoords).addTo(map);
+    directions.setDestination([$(el).attr('data-lng'), $(el).attr('data-lat')]);
+}

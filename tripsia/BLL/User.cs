@@ -1,4 +1,5 @@
-﻿using tripsia.DAL;
+﻿using System.Diagnostics;
+using tripsia.DAL;
 
 namespace tripsia.BLL
 {
@@ -35,6 +36,12 @@ namespace tripsia.BLL
         {
             UserDAO da = new UserDAO();
             return da.SelectById(this);
+        }
+
+        public User UpdateUserById()
+        {
+            UserDAO da = new UserDAO();
+            return da.UpdateById(this);
         }
     }
 }
