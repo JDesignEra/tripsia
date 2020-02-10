@@ -48,5 +48,11 @@ namespace tripsia.BLL
             UserDAO da = new UserDAO();
             return da.UpdateById(this);
         }
+
+        public User UpdateUserPasswordById()
+        {
+            UserDAO da = new UserDAO();
+            return da.UpdatePasswordById(this);
+        }
     }
 }

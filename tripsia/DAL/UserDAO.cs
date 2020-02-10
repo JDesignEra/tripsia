@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using tripsia.BLL;
+using tripsia.utilities;
 
 namespace tripsia.DAL
 {
@@ -26,7 +27,7 @@ namespace tripsia.DAL
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@email", user.email);
-                cmd.Parameters.AddWithValue("@password", user.password);
+                cmd.Parameters.AddWithValue("@password", new PasswordUtilities().Hash(user.password));
                 cmd.Parameters.AddWithValue("@name", user.name);
 
                 conn.Open();
@@ -43,7 +44,7 @@ namespace tripsia.DAL
         {
             SqlConnection conn = new SqlConnection(db);
 
-            string sql = "SELECT * FROM Users WHERE email = @email AND password = @password";
+            string sql = "SELECT * FROM Users WHERE email = @email";
             SqlDataAdapter da = new SqlDataAdapter(sql, conn);
             da.SelectCommand.Parameters.AddWithValue("@email", user.email);
             da.SelectCommand.Parameters.AddWithValue("@password", user.password);
@@ -55,7 +56,12 @@ namespace tripsia.DAL
             {
                 DataRow row = ds.Tables[0].Rows[0];
 
-                return new User(int.Parse(row["id"].ToString()), row["email"].ToString(), row["password"].ToString(), row["name"].ToString());
+                if (new PasswordUtilities().HashCheck(user.password, row["password"].ToString()))
+                {
+                    return new User(int.Parse(row["id"].ToString()), row["email"].ToString(), row["password"].ToString(), row["name"].ToString());
+                }
+
+                return null;
             }
 
             return null;
@@ -122,7 +128,7 @@ namespace tripsia.DAL
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@email", user.email);
-                cmd.Parameters.AddWithValue("@password", !string.IsNullOrEmpty(user.password) ? user.password : row["password"].ToString());
+                cmd.Parameters.AddWithValue("@password", !string.IsNullOrEmpty(user.password) ? user.password : new PasswordUtilities().Hash(row["password"].ToString()));
                 cmd.Parameters.AddWithValue("@name", user.name); ;
                 cmd.Parameters.AddWithValue("@id", user.id);
 
@@ -135,6 +141,54 @@ namespace tripsia.DAL
                     sql = "SELECT * FROM Users WHERE id = @id";
                     da = new SqlDataAdapter(sql, conn);
                     da.SelectCommand.Parameters.AddWithValue("@id", user.id);
+
+                    ds = new DataSet();
+                    da.Fill(ds);
+
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        row = ds.Tables[0].Rows[0];
+
+                        return new User(int.Parse(row["id"].ToString()), row["email"].ToString(), row["password"].ToString(), row["name"].ToString());
+                    }
+                }
+
+                return null;
+            }
+
+            return null;
+        }
+
+        public User UpdatePasswordByEmail(User user)
+        {
+            SqlConnection conn = new SqlConnection(db);
+
+            string sql = "SELECT * FROM Users WHERE email = @email";
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            da.SelectCommand.Parameters.AddWithValue("@email", user.email);
+
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            DataRow row = ds.Tables[0].Rows[0];
+
+            if (ds.Tables[0].Rows.Count == 1)
+            {
+                sql = "UPDATE Users SET password = @password WHERE email = @email";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@password", !string.IsNullOrEmpty(user.password) ? user.password : new PasswordUtilities().Hash(row["password"].ToString()));
+                cmd.Parameters.AddWithValue("@email", user.email);
+
+                conn.Open();
+                int result = cmd.ExecuteNonQuery();
+                conn.Close();
+
+                if (result > 0)
+                {
+                    sql = "SELECT * FROM Users WHERE email = @email";
+                    da = new SqlDataAdapter(sql, conn);
+                    da.SelectCommand.Parameters.AddWithValue("@email", user.email);
 
                     ds = new DataSet();
                     da.Fill(ds);

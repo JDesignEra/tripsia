@@ -77,6 +77,10 @@
                                     </asp:Repeater>
                                 </ul>
                             </div>
+
+                            <div class="card-footer">
+                                <asp:Button ID="moreBtn" runat="server" CssClass="btn btn-sm btn-block btn-primary" Text="LOAD MORE" />
+                            </div>
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>

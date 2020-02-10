@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using tripsia.BLL;
@@ -16,11 +17,13 @@ namespace tripsia
 
         protected void forgotPassBtn_Click(object sender, EventArgs e)
         {
-            User user = new User(email: emailTxtBox.Text).GetUserByEmail();
+            string randPassword = Membership.GeneratePassword(12, 5);
+
+            User user = new User(email: emailTxtBox.Text, password: randPassword).UpdateUserPasswordById();
 
             if (user != null)
             {
-                SendEmail(user.email, user.name, user.password);
+                SendEmail(user.email, user.name, randPassword);
             }
         }
 

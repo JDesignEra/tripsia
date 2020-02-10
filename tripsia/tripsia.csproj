@@ -236,6 +236,7 @@
     <Compile Include="Translate.aspx.designer.cs">
       <DependentUpon>Translate.aspx</DependentUpon>
     </Compile>
+    <Compile Include="utilities\PasswordUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Main.Master" />
