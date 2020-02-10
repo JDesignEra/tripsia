@@ -52,7 +52,7 @@ namespace tripsia.BLL
         public User UpdateUserPasswordById()
         {
             UserDAO da = new UserDAO();
-            return da.UpdatePasswordById(this);
+            return da.UpdatePasswordByEmail(this);
         }
     }
 }
