@@ -36,5 +36,11 @@ namespace tripsia.BLL
             FnbReviewsDAO da = new FnbReviewsDAO();
             return da.SelectByPidSortByDate(this);
         }
+
+        public DataTable getByUidSortByDate()
+        {
+            FnbReviewsDAO da = new FnbReviewsDAO();
+            return da.SelectByUidSortByDate(this);
+        }
     }
 }

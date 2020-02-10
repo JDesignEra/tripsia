@@ -15,15 +15,6 @@ namespace tripsia
     {
 
         /// <summary>
-        /// saveBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button saveBtn;
-
-        /// <summary>
         /// nameTxtBox control.
         /// </summary>
         /// <remarks>
@@ -103,5 +94,14 @@ namespace tripsia
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator cfmPassValidator;
+
+        /// <summary>
+        /// saveBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button saveBtn;
     }
 }

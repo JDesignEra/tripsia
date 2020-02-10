@@ -47,5 +47,24 @@ namespace tripsia.DAL
 
             return null;
         }
+
+        public DataTable SelectByUidSortByDate(FnbReviews fnbReviews)
+        {
+            SqlConnection conn = new SqlConnection(db);
+
+            string sql = "SELECT * FROM Fnb_Review WHERE uid = @uid ORDER BY dateTime ASC";
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            da.SelectCommand.Parameters.AddWithValue("@uid", fnbReviews.uid);
+
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return ds.Tables[0];
+            }
+
+            return null;
+        }
     }
 }
