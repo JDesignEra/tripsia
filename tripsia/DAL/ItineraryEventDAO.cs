@@ -54,7 +54,7 @@ namespace tripsia.DAL
 
             if (ds.Tables[0].Rows.Count > 0)
             {
-                sql = "SELECT * FROM Itinerary_Event WHERE id! = @id AND iid = @iid AND dateTime = @dateTime";
+                sql = "SELECT * FROM Itinerary_Event WHERE id != @id AND iid = @iid AND dateTime = @dateTime";
                 da = new SqlDataAdapter(sql, conn);
                 da.SelectCommand.Parameters.AddWithValue("@id", itineraryEvent.id);
                 da.SelectCommand.Parameters.AddWithValue("@iid", itineraryEvent.iid);

@@ -5,7 +5,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="content" runat="server">
-    <main class="container-fluid">
+    <main class="container-fluid animated fadeIn faster">
         <div class="d-flex flex-fill justify-content-end">
             <div class="default-state">
                 <button id="editModeBtn" class="btn btn-sm btn-info" type="button">

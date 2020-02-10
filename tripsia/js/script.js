@@ -28,14 +28,14 @@ $(document).ready(function () {
     });
 
     // Active navbar link
-    let currUrl = window.location.href;
-    let checkUrl = currUrl.slice(currUrl.indexOf('localhost'));
+    let currUrl = window.location.href.toLowerCase();
+    let checkUrl = currUrl.slice(currUrl.indexOf('localhost')).toLowerCase();
 
-    if (checkUrl === hostUrl || checkUrl === `${hostUrl}/`) {
+    if (checkUrl === hostUrl.toLowerCase() || checkUrl === `${hostUrl.toLowerCase()}/`) {
         $('.navbar-nav.main-nav a[href="default.aspx"]').parent().addClass('active');
     }
     else {
-        let href = currUrl.slice(currUrl.lastIndexOf('/') + 1);
+        let href = currUrl.slice(currUrl.lastIndexOf('/') + 1).toLowerCase();
         $(`.navbar-nav.main-nav a[href="${href}"]`).parent().addClass('active');
     }
 
