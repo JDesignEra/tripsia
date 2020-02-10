@@ -157,7 +157,7 @@ namespace tripsia
             ItineraryEvent itineraryEvent = new ItineraryEvent(iid: int.Parse(Request["id"].ToString()), dateTime: date);
             DataTable events = itineraryEvent.getByDate();
 
-            Repeater eventRepeater  = (Repeater) e.Item.FindControl("eventRepeater");
+            Repeater eventRepeater = (Repeater)e.Item.FindControl("eventRepeater");
             eventRepeater.DataSource = events;
             eventRepeater.DataBind();
         }
@@ -166,7 +166,7 @@ namespace tripsia
         {
             Regex regex = new Regex(@"^(0[1-9]|1[0-2]):[0-5][0-9](am|pm|AM|PM)$");
 
-            if(!regex.IsMatch(e.Value.ToString()))
+            if (!regex.IsMatch(e.Value.ToString()))
             {
                 Page.ClientScript.RegisterStartupScript(
                     this.GetType(),

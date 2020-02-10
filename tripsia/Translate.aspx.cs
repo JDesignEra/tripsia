@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using tripsia.BLL;
@@ -105,7 +104,7 @@ namespace tripsia
                 {
                     BaseAddress = new Uri("https://translation.googleapis.com/language/translate/v2")
                 };
-                
+
                 Task<HttpResponseMessage> response;
 
                 string sourceParam = "?";

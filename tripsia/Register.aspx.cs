@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Mail;
-using System.Threading;
 using System.Web.UI.WebControls;
 using tripsia.BLL;
 
@@ -32,11 +31,12 @@ namespace tripsia
                         string.Format("toastSuccess('<strong>{0}</strong> registered successfully.');", user.email),
                         true
                     );
-                    
+
                     Response.AddHeader("REFRESH", "1;URL=login.aspx");
                 }
             }
         }
+
         protected void EmailValidate(object sender, ServerValidateEventArgs e)
         {
             try

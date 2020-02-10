@@ -6,7 +6,7 @@ using tripsia.BLL;
 
 namespace tripsia
 {
-    public partial class Login : System.Web.UI.Page 
+    public partial class Login : System.Web.UI.Page
     {
 
         protected string toastMsg { get { return Session["name"].ToString(); } }
@@ -28,9 +28,9 @@ namespace tripsia
                     Session["name"] = user.name;
 
                     Page.ClientScript.RegisterStartupScript(
-                        this.GetType(), 
+                        this.GetType(),
                         "toast",
-                        string.Format("toastSuccess('Welcome back, <strong>{0}</strong>');", user.name), 
+                        string.Format("toastSuccess('Welcome back, <strong>{0}</strong>');", user.name),
                         true
                     );
 

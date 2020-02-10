@@ -202,7 +202,7 @@ namespace tripsia
                         resultsOrgLen = results.Length;
 
                         Array.Resize<Result>(ref results, resultsOrgLen + loopData.results.Length);
-                        Array.Copy(loopData.results, 0, results, resultsOrgLen, loopData.results.Length);;
+                        Array.Copy(loopData.results, 0, results, resultsOrgLen, loopData.results.Length); ;
                     }
                 }
 

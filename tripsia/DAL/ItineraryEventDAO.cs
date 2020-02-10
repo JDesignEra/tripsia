@@ -37,7 +37,7 @@ namespace tripsia.DAL
 
                 return result != 0;
             }
-            
+
             return false;
         }
 

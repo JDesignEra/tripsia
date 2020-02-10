@@ -12,7 +12,7 @@ namespace tripsia
     {
         protected void Page_load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void setRadBtn_Click(object sender, EventArgs e)
@@ -56,7 +56,7 @@ namespace tripsia
 
         protected void detailsBtn_Click(object sender, EventArgs e)
         {
-            Button btn = (Button) sender;
+            Button btn = (Button)sender;
 
             Place data = getPlaceDetails(btn.Attributes["data-id"]);
 

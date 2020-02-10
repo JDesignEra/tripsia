@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using tripsia.DAL;
+﻿using tripsia.DAL;
 
 namespace tripsia.BLL
 {
@@ -32,10 +31,16 @@ namespace tripsia.BLL
             return da.SelectByEmailAndPassword(this);
         }
 
-        public User GetUser()
+        public User GetUserById()
         {
             UserDAO da = new UserDAO();
             return da.SelectById(this);
+        }
+
+        public User GetUserByEmail()
+        {
+            UserDAO da = new UserDAO();
+            return da.SelectByEmail(this);
         }
 
         public User UpdateUserById()

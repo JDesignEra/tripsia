@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using tripsia.BLL;
@@ -69,6 +68,27 @@ namespace tripsia.DAL
             string sql = "SELECT * FROM Users WHERE id = @id";
             SqlDataAdapter da = new SqlDataAdapter(sql, conn);
             da.SelectCommand.Parameters.AddWithValue("@id", user.id);
+
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                DataRow row = ds.Tables[0].Rows[0];
+
+                return new User(int.Parse(row["id"].ToString()), row["email"].ToString(), row["password"].ToString(), row["name"].ToString());
+            }
+
+            return null;
+        }
+
+        public User SelectByEmail(User user)
+        {
+            SqlConnection conn = new SqlConnection(db);
+
+            string sql = "SELECT * FROM Users WHERE email = @email";
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            da.SelectCommand.Parameters.AddWithValue("@email", user.email);
 
             DataSet ds = new DataSet();
             da.Fill(ds);
