@@ -127,7 +127,7 @@ namespace tripsia.DAL
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@email", user.email);
-                cmd.Parameters.AddWithValue("@password", !string.IsNullOrEmpty(user.password) ? user.password : new PasswordUtilities().Hash(row["password"].ToString()));
+                cmd.Parameters.AddWithValue("@password", !string.IsNullOrEmpty(user.password) ? new PasswordUtilities().Hash(row["password"].ToString()) : user.password);
                 cmd.Parameters.AddWithValue("@name", user.name); ;
                 cmd.Parameters.AddWithValue("@id", user.id);
 
@@ -169,14 +169,14 @@ namespace tripsia.DAL
             DataSet ds = new DataSet();
             da.Fill(ds);
 
-            DataRow row = ds.Tables[0].Rows[0];
-
             if (ds.Tables[0].Rows.Count == 1)
             {
+                DataRow row = ds.Tables[0].Rows[0];
+
                 sql = "UPDATE Users SET password = @password WHERE email = @email";
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
-                cmd.Parameters.AddWithValue("@password", !string.IsNullOrEmpty(user.password) ? user.password : new PasswordUtilities().Hash(row["password"].ToString()));
+                cmd.Parameters.AddWithValue("@password", !string.IsNullOrEmpty(user.password) ? new PasswordUtilities().Hash(row["password"].ToString()) : user.password);
                 cmd.Parameters.AddWithValue("@email", user.email);
 
                 conn.Open();

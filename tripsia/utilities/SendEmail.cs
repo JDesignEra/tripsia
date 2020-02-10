@@ -14,12 +14,12 @@ namespace tripsia.utilities
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new System.Net.NetworkCredential("dev.projectemail123789456@gmail.com", "eadpproject2020"),
+                Credentials = new System.Net.NetworkCredential("projectemail123789456@gmail.com", "eadpproject2020"),
             };
 
             MailMessage mail = new MailMessage
             {
-                From = new MailAddress("dev.shaunnp@gmail.com", "AIRMAZE"),
+                From = new MailAddress("projectemail123789456@gmail.com", "Tripsia"),
                 Subject = subject,
                 IsBodyHtml = true,
                 Body = string.Format("<html><head></head><body>{0}</body></html>", msg),
@@ -31,7 +31,7 @@ namespace tripsia.utilities
             {
                 client.Send(mail);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
