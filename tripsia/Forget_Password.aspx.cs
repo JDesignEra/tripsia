@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Net;
 using System.Net.Mail;
 using System.Web.UI;
@@ -62,7 +61,6 @@ namespace tripsia
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
                 Page.ClientScript.RegisterStartupScript(
                     this.GetType(),
                     "toast",

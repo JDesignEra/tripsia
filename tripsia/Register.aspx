@@ -9,6 +9,11 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="content" runat="server">
+    <video class="vid-full-bg" autoplay muted loop>
+        <source src="videos/typing_laptop.mp4" type="video/mp4">
+    </video>
+    <div class="rgba-teal-light vid-full-bg"></div>
+
     <main class="container-fluid d-flex flex-column justify-content-center animated fadeIn faster">
         <div class="row">
             <div class="col-md-4 mx-auto">

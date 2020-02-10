@@ -117,7 +117,15 @@
     <Content Include="Profile.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Translate.aspx" />
+    <Content Include="videos\book.mp4" />
+    <Content Include="videos\forest.mp4" />
+    <Content Include="videos\resort.mp4" />
+    <Content Include="videos\restaurant.mp4" />
+    <Content Include="videos\sky.mp4" />
     <Content Include="videos\tropical.mp4" />
+    <Content Include="videos\typing.mp4" />
+    <Content Include="videos\typing_laptop.mp4" />
+    <Content Include="videos\writing.mp4" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
