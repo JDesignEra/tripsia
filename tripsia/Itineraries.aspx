@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"></asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="content" runat="server">
-    <main class="container-fluid animated fadeIn faster">
+    <main class="container-fluid">
         <div id="defaultStae" class="d-flex flex-fill justify-content-end">
             <button id="doneEditBtn" type="button" class="btn btn-sm btn-success d-none">
                 <i class="fas fa-check mr-1"></i> DONE EDITING

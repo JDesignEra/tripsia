@@ -1,20 +1,7 @@
 ﻿main {
     padding-top: 4.5rem !important;
     margin-bottom: 1rem !important;
-    min-height: calc(100vh - 69px);
-}
-
-nav.navbar .nav-link {
-    color: #009688 !important;
-}
-
-nav.navbar .nav-item.active {
-    border-radius: .2rem;
-    background-color: rgba(0, 150, 136, .5);
-}
-
-nav.navbar .nav-item.active .nav-link {
-    color: #ffffff !important;
+    min-height: calc(100vh - 5.5rem - 53.33px);
 }
 
 nav.navbar .dropdown-menu .dropdown-item i {

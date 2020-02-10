@@ -31,22 +31,10 @@ namespace tripsia.BLL
             return da.SelectByEmailAndPassword(this);
         }
 
-        public User GetUserById()
+        public User GetUser()
         {
             UserDAO da = new UserDAO();
             return da.SelectById(this);
-        }
-
-        public User GetUserByEmail()
-        {
-            UserDAO da = new UserDAO();
-            return da.SelectByEmail(this);
-        }
-
-        public User UpdateUserById()
-        {
-            UserDAO da = new UserDAO();
-            return da.UpdateById(this);
         }
     }
 }

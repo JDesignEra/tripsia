@@ -60,11 +60,6 @@ namespace tripsia
                 cfmPassValidator.ErrorMessage = "Confirm Password does not match with Password.";
                 cfmPassValidator.IsValid = false;
             }
-            else if (e.Value.Length < 8)
-            {
-                passValidator.ErrorMessage = "Password has to be 8 characters or more.";
-                e.IsValid = false;
-            }
         }
 
         protected void CfmPasswordValidate(object sender, ServerValidateEventArgs e)
