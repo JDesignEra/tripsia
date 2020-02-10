@@ -2,7 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
-        #<%=placeDetails.ClientID%> {width: 100%};
+        #<%=placeDetails.ClientID%> {
+            width: 100%;
+        }
     </style>
 
     <script type="text/javascript">
@@ -36,7 +38,7 @@
                         </div>
 
                         <div class="card">
-                            <div class="card-body overflow-auto" style="max-height: calc(100vh - 257px - 1.5rem);">
+                            <div class="card-body overflow-auto" style="max-height: calc(100vh - 259px - 1.5rem);">
                                 <div id="setRadMsg" runat="server" class="text-center">
                                     <h5 class="card-title">Set Search Radius</h5>
                                 </div>
