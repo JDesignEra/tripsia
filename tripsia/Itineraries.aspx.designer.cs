@@ -15,147 +15,75 @@ namespace tripsia
     {
 
         /// <summary>
-        /// emptyMsg control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl emptyMsg;
+        protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// itinerariesRepeater control.
+        /// tbSubject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater itinerariesRepeater;
+        protected global::System.Web.UI.WebControls.TextBox tbSubject;
 
         /// <summary>
-        /// newTitleTxtBox control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox newTitleTxtBox;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// newTitleReqValidator control.
+        /// tbDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator newTitleReqValidator;
+        protected global::System.Web.UI.WebControls.TextBox tbDesc;
 
         /// <summary>
-        /// newTitleValidator control.
+        /// Label3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator newTitleValidator;
+        protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// newDescTxtBox control.
+        /// ddlRating control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox newDescTxtBox;
+        protected global::System.Web.UI.WebControls.DropDownList ddlRating;
 
         /// <summary>
-        /// addBtn control.
+        /// btnSubmit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button addBtn;
+        protected global::System.Web.UI.WebControls.Button btnSubmit;
 
         /// <summary>
-        /// editTitleTxtBox control.
+        /// lblResult control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox editTitleTxtBox;
-
-        /// <summary>
-        /// editTitleTxtBoxReqValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator editTitleTxtBoxReqValidator;
-
-        /// <summary>
-        /// editTitleTxtBoxValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator editTitleTxtBoxValidator;
-
-        /// <summary>
-        /// editDescTxtBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox editDescTxtBox;
-
-        /// <summary>
-        /// editIdTxtBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox editIdTxtBox;
-
-        /// <summary>
-        /// updateBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button updateBtn;
-
-        /// <summary>
-        /// delIdTxtBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox delIdTxtBox;
-
-        /// <summary>
-        /// delTitleTxtBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox delTitleTxtBox;
-
-        /// <summary>
-        /// delBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button delBtn;
+        protected global::System.Web.UI.WebControls.Label lblResult;
     }
 }
