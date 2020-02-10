@@ -285,7 +285,7 @@
 
                 <div class="modal-footer">
                     <button class="btn btn-md btn-danger" type="button" data-dismiss="modal">CANCEL</button>
-                    <asp:Button ID="submitBtn" runat="server" CssClass="btn btn-md btn-success" Text="SUBMIT" ValidationGroup="review" OnClick="submitBtn_Click" />
+                    <asp:Button ID="submitBtn" runat="server" CssClass="btn btn-md btn-success" Text="LEAVE REVIEW" ValidationGroup="review" OnClick="submitBtn_Click" />
                 </div>
             </div>
         </div>

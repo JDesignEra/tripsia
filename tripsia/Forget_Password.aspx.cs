@@ -25,10 +25,14 @@ namespace tripsia
             {
                 string emailMsg = string.Format("Dear, {0}<br />" +
                     "<p>It seems that you have forgotten your password.</p>" +
-                    "<p>Your password is <strong>{1}</strong>.",
+                    "<p>Your new password is <strong>{1}</strong>.",
                     user.name, randPassword);
 
-                if (!new SendEmail().Send(user.email, "Forgot Password", ""))
+                if (new SendEmail().Send(user.email, "Forgot Password", emailMsg))
+                {
+                    Response.Redirect("login.aspx");
+                }
+                else
                 {
                     Page.ClientScript.RegisterStartupScript(
                         this.GetType(),

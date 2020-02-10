@@ -35,8 +35,8 @@
                             </div>
                         </div>
 
-                        <div class="card overflow-auto" style="max-height: calc(100vh - 227px);">
-                            <div class="card-body">
+                        <div class="card">
+                            <div class="card-body overflow-auto" style="max-height: calc(100vh - 257px - 1.5rem);">
                                 <div id="setRadMsg" runat="server" class="text-center">
                                     <h5 class="card-title">Set Search Radius</h5>
                                 </div>
@@ -46,13 +46,13 @@
                                 </div>
 
                                 <ul class="list-group-flush pl-0">
-                                    <asp:Repeater ID="placesRepeater" runat="server">
+                                    <asp:Repeater ID="placesRepeater" runat="server" OnItemDataBound="placesRepeater_ItemDataBound">
                                         <ItemTemplate>
                                             <li class="list-group-item">
                                                 <h6 class="font-weight-bold"><%#Eval("name") %></h6>
 
                                                 <div class="row">
-                                                    <div class="col-12 col-md-7">
+                                                    <div class="col-12 col-md-7 d-flex flex-column justify-content-center">
                                                         <p class="grey-text">
                                                             <small>
                                                                 <span class="text-warning">
@@ -70,6 +70,7 @@
                                                     <div class="col-12 col-md-5">
                                                         <button class="btn btn-sm btn-block btn-primary my-1" type="button" data-role="getDirection" data-lat="<%#Eval("geometry.location.lat") %>" data-lng="<%#Eval("geometry.location.lng") %>" onclick="getDirection(this)">SET DESTINATION</button>
                                                         <asp:Button ID="detailsBtn" runat="server" CssClass="btn btn-sm btn-block btn-info my-1" data-toggle="modal" data-target="#detailsModal" data-id='<%# Eval("place_id") %>' Text="MORE DETAILS" OnClick="detailsBtn_Click" />
+                                                        <button id="leaveReviewBtn" runat="server" class="btn btn-sm btn-block btn-danger mt-2" type="button" data-id='<%#Eval("place_id") %>' data-toggle="modal" data-target="#reviewModal" data-name='<%#Eval("name") %>' onclick="leaveReviewBtn_OnClick(this)">LEAVE REVIEW</button>
                                                     </div>
                                                 </div>
                                             </li>
@@ -79,7 +80,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <asp:Button ID="moreBtn" runat="server" CssClass="btn btn-sm btn-block btn-primary" Text="LOAD MORE" />
+                                <asp:Button ID="moreBtn" runat="server" CssClass="btn btn-sm btn-block btn-primary" Text="LOAD MORE" OnClick="moreBtn_Click" />
                             </div>
                         </div>
                     </ContentTemplate>
@@ -208,20 +209,26 @@
                                 <div class="col-12">
                                     <asp:UpdatePanel ID="reviewsPanel" runat="server">
                                         <ContentTemplate>
-                                            <div id="userReviewsAccordion" class="accordion md-accordion" role="tablist">
-                                                <div class="card border-0 m-0 p-0">
-                                                    <div role="tab">
-                                                        <a class="collapsed mb-2" data-toggle="collapse" data-parent="#userReviewsAccordion" href="#userReviews">
-                                                            USER REVIEWS <i class="fas fa-angle-down rotate-icon"></i>
+                                            <ul class="nav nav-tabs md-tabs nav-justified" id="reviewTab" role="tablist">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active show" data-toggle="tab" href="#googleReview" role="tab">
+                                                            <small>GOOGLE USER REVIEWS</small>
                                                         </a>
-                                                    </div>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" data-toggle="tab" href="#tripsiaReview" role="tab">
+                                                            <small>TRIPSIA USER REVIEWS</small>
+                                                        </a>
+                                                    </li>
+                                                </ul>
 
-                                                    <div id="userReviews" class="collapse my-2" role="tabpanel" data-parent="userReviewsAccordion">
+                                                <div class="tab-content pt-5" id="reviewTabContent">
+                                                    <div class="tab-pane fade active show" id="googleReview" role="tabpanel">
                                                         <asp:Repeater ID="googleReviewsRepeater" runat="server">
                                                             <ItemTemplate>
-                                                                <h5 class="card-title font-weight-bold">
+                                                                <h6 class="card-title font-weight-bold">
                                                                     <%# Eval("author_name") %>
-                                                                </h5>
+                                                                </h6>
 
                                                                 <small class="text-warning mb-3">
                                                                     <%#Eval("rating") %> <i class="fas fa-star ml-1"></i>
@@ -237,8 +244,37 @@
                                                             </ItemTemplate>
                                                         </asp:Repeater>
                                                     </div>
+
+                                                    <div class="tab-pane fade active show" id="tripsiaReview" role="tabpanel">
+                                                        <div id="emptyReviews" runat="server">
+                                                            <h5 class="card-title grey-text text-center">
+                                                                Tripsia Users Has Not Reviewed This Outlet Yet
+                                                            </h5>
+                                                        </div>
+
+                                                        <div id="tripsiaReviews" runat="server" style="display: none !important;">
+                                                            <asp:Repeater ID="tripsiaReviewsRepeater" runat="server">
+                                                                <ItemTemplate>
+                                                                    <h6 class="card-title font-weight-bold">
+                                                                        <%#Eval("name") %>
+                                                                    </h6>
+
+                                                                    <small class="text-warning mb-3">
+                                                                        <%#Eval("rating") %> <i class="fas fa-star ml-1"></i>
+                                                                    </small>
+
+                                                                    <p><%# Eval("review") %></p>
+
+                                                                    <small class="grey-text">
+                                                                        <%#Eval("dateTime") %>
+                                                                    </small>
+
+                                                                    <hr />
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>
@@ -250,9 +286,68 @@
         </div>
     </div>
 
+    <div id="reviewModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-comments-alt mr-1"></i> REVIEW
+                    </h5>
+
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <asp:TextBox ID="idTxtBox" runat="server" TextMode="SingleLine" CssClass="form-control d-none"></asp:TextBox>
+
+                    <div class="input-group mb-0">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-star"></i>
+                            </span>
+                        </div>
+
+                        <div class="md-form md-outline">
+                            <asp:TextBox ID="ratingTxtBox" runat="server" TextMode="Number" CssClass="form-control" Text="0" step="1" min="0" max="5"></asp:TextBox>
+                            <label for="<%=ratingTxtBox.ClientID %>">Rate</label>
+                        </div>
+                    </div>
+                    <small class="text-danger">
+                        <asp:RequiredFieldValidator ID="ratingReqValidator" runat="server" ControlToValidate="ratingTxtBox" ValidationGroup="review" ErrorMessage="Rate is required." Display="Dynamic"></asp:RequiredFieldValidator>
+                        <asp:RangeValidator ID="ratingRangeValidator" runat="server" ControlToValidate="ratingTxtBox" ErrorMessage="Rating has be between 0 to 5." Display="Dynamic" Type="Integer" MinimumValue="0" MaximumValue="5"></asp:RangeValidator>
+                    </small>
+
+                    <div class="input-group mb-0 mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                        </div>
+
+                        <div class="md-form md-outline">
+                            <asp:TextBox ID="reviewTxtBox" runat="server" TextMode="MultiLine" CssClass="form-control" style="min-height: 100px;"></asp:TextBox>
+                            <label for="<%=reviewTxtBox.ClientID %>">Review</label>
+                        </div>
+                    </div>
+                    <small class="text-danger">
+                        <asp:RequiredFieldValidator ID="reviewReqValidator" runat="server" ControlToValidate="reviewTxtBox" ValidationGroup="review" ErrorMessage="Review is required." Display="Dynamic"></asp:RequiredFieldValidator>
+                    </small>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-md btn-danger" type="button" data-dismiss="modal">CANCEL</button>
+                    <asp:Button ID="leaveReviewBtn" runat="server" CssClass="btn btn-md btn-success" Text="LEAVE REVIEW" ValidationGroup="review" OnClick="leaveReviewBtn_Click" />
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         let latClientId = <%=latTxtBox.ClientID %>;
         let lngClientId = <%=lngTxtBox.ClientID %>;
         let setRadClientId = <%=setRadBtn.ClientID %>;
+        let idTxtBoxCid = <%=idTxtBox.ClientID%>;
     </script>
 </asp:Content>

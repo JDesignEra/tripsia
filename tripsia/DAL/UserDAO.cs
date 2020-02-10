@@ -47,7 +47,6 @@ namespace tripsia.DAL
             string sql = "SELECT * FROM Users WHERE email = @email";
             SqlDataAdapter da = new SqlDataAdapter(sql, conn);
             da.SelectCommand.Parameters.AddWithValue("@email", user.email);
-            da.SelectCommand.Parameters.AddWithValue("@password", user.password);
 
             DataSet ds = new DataSet();
             da.Fill(ds);

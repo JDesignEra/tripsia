@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Data;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using tripsia.BLL;
 
@@ -10,9 +12,14 @@ namespace tripsia
 {
     public partial class FNB_Map : System.Web.UI.Page
     {
+        private static Places places;
+
         protected void Page_load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack)
+            {
+                moreBtn.Enabled = places == null ? false : true;
+            }
         }
 
         protected void setRadBtn_Click(object sender, EventArgs e)
@@ -32,19 +39,21 @@ namespace tripsia
             }
             else if (!string.IsNullOrEmpty(lat) && !string.IsNullOrEmpty(lng))
             {
-                Places data = getPlaces(radTxtBox.Text, lat, lng);
+                places = GetPlaces(radTxtBox.Text, lat, lng);
 
-                if (data != null)
+                if (places != null)
                 {
-                    placesRepeater.DataSource = data.results;
+                    placesRepeater.DataSource = places.results;
                     placesRepeater.DataBind();
 
                     setRadMsg.Style.Add("display", "none !important");
 
-                    if (data.status != "OK")
+                    if (places.status != "OK")
                     {
                         emptyMsg.Style.Remove("display");
                     }
+
+                    moreBtn.Enabled = string.IsNullOrEmpty(places.next_page_token) ? false : true;
                 }
                 else
                 {
@@ -54,10 +63,52 @@ namespace tripsia
             }
         }
 
+        protected void moreBtn_Click(object sender, EventArgs e)
+        {
+            if (places != null)
+            {
+                places = GetMorePlaces(places);
+
+                placesRepeater.DataSource = places.results;
+                placesRepeater.DataBind();
+
+                setRadMsg.Style.Add("display", "none !important");
+
+                if (places.status != "OK")
+                {
+                    emptyMsg.Style.Remove("display");
+                }
+
+                moreBtn.Enabled = string.IsNullOrEmpty(places.next_page_token) ? false : true;
+            }
+            else
+            {
+                setRadMsg.Style.Add("display", "none !important");
+                emptyMsg.Style.Remove("display");
+            }
+        }
+
         protected void detailsBtn_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
+            string pid = btn.Attributes["data-id"];
+            DataTable reviews = new FnbReviews(pid: pid).getByPidSortByDate();
 
+            if (reviews != null)
+            {
+                tripsiaReviewsRepeater.DataSource = reviews;
+                tripsiaReviewsRepeater.DataBind();
+
+                emptyReviews.Style.Add("display", "none !important");
+                tripsiaReviews.Style.Remove("display");
+            }
+            else
+            {
+                emptyReviews.Style.Remove("display");
+                tripsiaReviews.Style.Add("display", "none !important");
+            }
+
+            // Google Reviews
             Place data = getPlaceDetails(btn.Attributes["data-id"]);
 
             if (data != null)
@@ -91,7 +142,53 @@ namespace tripsia
             }
         }
 
-        public Places getPlaces(string radius, string lat, string lng)
+        protected void leaveReviewBtn_Click(object sender, EventArgs e)
+        {
+            if (Session["uid"] != null && Page.IsValid)
+            {
+                FnbReviews hotelReviews = new FnbReviews(
+                    review: reviewTxtBox.Text,
+                    pid: idTxtBox.Text,
+                    uid: int.Parse(Session["uid"].ToString()),
+                    rating: float.Parse(ratingTxtBox.Text),
+                    dateTime: DateTime.Now
+                );
+
+                if (hotelReviews.Create())
+                {
+                    ScriptManager.RegisterStartupScript(
+                        this,
+                        this.GetType(),
+                        "toast",
+                        "toastSuccess('Review submitted successfully.');",
+                        true
+                    );
+
+                    Response.AddHeader("REFRESH", "1;URL=fnb_map.aspx");
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(
+                        this,
+                        this.GetType(),
+                        "toast",
+                        "toastDanger('Review failed to submit.');",
+                        true
+                    );
+                }
+            }
+        }
+
+        protected void placesRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (Session["uid"] == null)
+            {
+                HtmlButton btn = (HtmlButton)e.Item.FindControl("leaveReviewBtn");
+                btn.Style.Add("display", "none !important");
+            }
+        }
+
+        public Places GetPlaces(string radius, string lat, string lng)
         {
             HttpClient client = new HttpClient
             {
@@ -130,8 +227,6 @@ namespace tripsia
 
                 while (!string.IsNullOrEmpty(data.next_page_token) && results.Length < 60)
                 {
-                    Places loopData = null;
-
                     response = client.GetAsync(
                         string.Format(
                             "?pagetoken={0}&key={1}",
@@ -149,7 +244,7 @@ namespace tripsia
                         read = result.Content.ReadAsStringAsync();
                         read.Wait();
 
-                        loopData = JsonConvert.DeserializeObject<Places>(read.Result);
+                        Places loopData = JsonConvert.DeserializeObject<Places>(read.Result);
                         resultsOrgLen = results.Length;
 
                         Array.Resize<Result>(ref results, resultsOrgLen + loopData.results.Length);
@@ -158,6 +253,59 @@ namespace tripsia
                 }
 
                 data.results = results;
+            }
+
+            return data;
+        }
+
+        public Places GetMorePlaces(Places places)
+        {
+            Places data = places;
+
+            if (!string.IsNullOrEmpty(data.next_page_token))
+            {
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri("https://maps.googleapis.com/maps/api/place/nearbysearch/json")
+                };
+
+                Result[] results = new Result[0];
+                int resultsOrgLen = results.Length;
+                int newLen = data.results.Length + 60;
+
+                Array.Resize<Result>(ref results, resultsOrgLen + data.results.Length);
+                Array.Copy(data.results, 0, results, resultsOrgLen, data.results.Length);
+
+                Task<HttpResponseMessage> response;
+
+                while (!string.IsNullOrEmpty(data.next_page_token) && results.Length < newLen)
+                {
+                    response = client.GetAsync(
+                        string.Format(
+                            "?pagetoken={0}&key={1}",
+                            data.next_page_token,
+                            System.Configuration.ConfigurationManager.AppSettings["googleApi"]
+                        )
+                    );
+
+                    response.Wait();
+
+                    var result = response.Result;
+
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var read = result.Content.ReadAsStringAsync();
+                        read.Wait();
+
+                        Places loopData = JsonConvert.DeserializeObject<Places>(read.Result);
+                        resultsOrgLen = results.Length;
+
+                        Array.Resize<Result>(ref results, resultsOrgLen + loopData.results.Length);
+                        Array.Copy(loopData.results, 0, results, resultsOrgLen, loopData.results.Length); ;
+                    }
+
+                    data.results = results;
+                }
             }
 
             return data;

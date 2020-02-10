@@ -130,7 +130,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\Flights.cs" />
+    <Compile Include="BLL\FnbReviews.cs" />
     <Compile Include="BLL\HotelReviews.cs" />
+    <Compile Include="DAL\FnbReviewsDAO.cs" />
     <Compile Include="DAL\HotelReviewsDAO.cs" />
     <Compile Include="Edit_Profile.aspx.cs">
       <DependentUpon>Edit_Profile.aspx</DependentUpon>

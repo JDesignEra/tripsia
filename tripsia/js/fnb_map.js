@@ -170,3 +170,7 @@ function getDirection(el) {
     marker = new mapboxgl.Marker({ color: '#ff3547' }).setLngLat(destCoords).addTo(map);
     directions.setDestination([$(el).attr('data-lng'), $(el).attr('data-lat')]);
 }
+
+function leaveReviewBtn_OnClick(el) {
+    $(idTxtBoxCid).val($(el).attr('data-id'));
+}
