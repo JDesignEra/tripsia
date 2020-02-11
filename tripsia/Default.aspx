@@ -52,8 +52,10 @@
                         <ul class="animated fadeInUp col-md-12 list-unstyled">
                             <li><h1 class="font-weight-bold text-uppercase">Welcome to Tripsia</h1></li>
                             <li><p class="font-weight-bold text-uppercase pt-4">Your one stop travel needs</p></li>
-                            <li><a href="login.aspx" class="btn btn-md btn-info btn-rounded">LOGIN</a></li>
-                            <li>
+                            <li id="loginLink" runat="server" >
+                                <a href="login.aspx" class="btn btn-md btn-info btn-rounded">LOGIN</a>
+                            </li>
+                            <li id="registerLink" runat="server" >
                                 <small class="rgba-black-strong p-2 rounded">
                                     Don't have an account? <a href="Register.aspx">Register Here</a>
                                 </small>

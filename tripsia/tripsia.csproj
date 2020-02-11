@@ -74,6 +74,7 @@
   <ItemGroup>
     <Content Include="css\vendors\datatables.min.css" />
     <Content Include="Edit_Profile.aspx" />
+    <Content Include="favicon.ico" />
     <Content Include="Flights.aspx" />
     <Content Include="App_Data\database.mdf" />
     <Content Include="App_Data\database_log.ldf">
