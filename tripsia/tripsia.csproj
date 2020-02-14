@@ -150,7 +150,6 @@
       <DependentUpon>Flights.aspx</DependentUpon>
     </Compile>
     <Compile Include="BLL\Countries.cs" />
-    <Compile Include="BLL\AirlinesCode.cs" />
     <Compile Include="BLL\Itinerary.cs" />
     <Compile Include="BLL\ItineraryEvent.cs" />
     <Compile Include="BLL\Place.cs" />

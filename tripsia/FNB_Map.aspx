@@ -312,13 +312,13 @@
                         </div>
 
                         <div class="md-form md-outline">
-                            <asp:TextBox ID="ratingTxtBox" runat="server" TextMode="Number" CssClass="form-control" Text="0" step="1" min="0" max="5"></asp:TextBox>
+                            <asp:TextBox ID="ratingTxtBox" runat="server" TextMode="Number" CssClass="form-control" Text="0" step="0.1" min="0" max="5"></asp:TextBox>
                             <label for="<%=ratingTxtBox.ClientID %>">Rate</label>
                         </div>
                     </div>
                     <small class="text-danger">
                         <asp:RequiredFieldValidator ID="ratingReqValidator" runat="server" ControlToValidate="ratingTxtBox" ValidationGroup="review" ErrorMessage="Rate is required." Display="Dynamic"></asp:RequiredFieldValidator>
-                        <asp:RangeValidator ID="ratingRangeValidator" runat="server" ControlToValidate="ratingTxtBox" ErrorMessage="Rating has be between 0 to 5." Display="Dynamic" Type="Integer" MinimumValue="0" MaximumValue="5"></asp:RangeValidator>
+                        <asp:RangeValidator ID="ratingRangeValidator" runat="server" ControlToValidate="ratingTxtBox" ErrorMessage="Rating has be between 0 to 5." Display="Dynamic" Type="Double" MinimumValue="0" MaximumValue="5"></asp:RangeValidator>
                     </small>
 
                     <div class="input-group mb-0 mt-3">
